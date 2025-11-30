@@ -510,10 +510,10 @@ export const TOKEN_METADATA: {
 // ABI for ERC-20 balanceOf function
 export const ERC20_ABI = [
   {
-     stateMutability: 'view',
     inputs: [{ name: '_owner', type: 'address' }],
     name: 'balanceOf',
     outputs: [{ name: 'balance', type: 'uint256' }],
     type: 'function',
+    stateMutability: 'view'
   },
 ];
