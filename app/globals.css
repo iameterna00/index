@@ -1,0 +1,333 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ensure proper scrolling for the calculator */
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body {
+  background-color: #f9fafb;
+  /* Set IBM Plex Sans as the default font for the entire body */
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: 'IBM Plex Sans', sans-serif; /* Updated to IBM Plex Sans */
+  --font-mono: var(--font-geist-mono);
+  --font-custom: 'IBM Plex Sans', sans-serif; /* Updated to IBM Plex Sans */
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: #f0f2f7;
+  --foreground: #fafcff;
+  --secondary: #191d20b3;
+  --primary: #000000;
+  --muted: #191d2080;
+  --card: #191d20f2;
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: #191d200f;
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: #fafcff;
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: #15181a;
+  --foreground: #202426;
+  --secondary: #ffffffcc;
+  --primary: #ffffff;
+  --muted: #ffffff80;
+  --card: #fffffff2;
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: #afafaf1a;
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: #303436;
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* You can keep these font-face declarations if you still need them for fallback */
+@font-face {
+  font-family: "FK Grotesk";
+  src: url("/fonts/FKGroteskNeueTrial-Regular-BF6576818c3af74.otf")
+    format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "FK Grotesk";
+  src: url("/fonts/FKGroteskNeueTrial-Bold-BF6576818bd3700.otf")
+    format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Bold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    overflow: hidden;
+  }
+  body,
+  html {
+    /* Set IBM Plex Sans as the default font */
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+
+  .font-custom {
+    /* Updated to use IBM Plex Sans */
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 200;
+  }
+}
+
+@media (min-width: 1920px) {
+  .custom-3xl-padding {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+}
+
+@media (width >= 270px) {
+  .custom-3xl-grid {
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  }
+}
+
+.before-line::before {
+  @apply block content-[''] absolute top-0 left-0 w-px h-full bg-accent;
+}
+
+.svelte-w5zexe {
+  display: none !important;
+}
+
+@media (max-width: 720px) {
+  .flex-responsive > div {
+    min-width: 100% !important; /* 1 column */
+  }
+}
+@media (min-width: 721px) and (max-width: 1024px) {
+  .flex-responsive > div {
+    min-width: calc(50% - 12px) !important; /* 2 columns (account for gap-6) */
+  }
+}
+@media (min-width: 1400px) {
+  .flex-responsive > div {
+    min-width: calc(33.33% - 12px) !important; /* 3 columns */
+  }
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+/* Force light theme for calculator - Override dark theme */
+.calculator-container,
+.calculator-container *,
+.dark .calculator-container,
+.dark .calculator-container * {
+  --background: #ffffff !important;
+  --foreground: #1f2937 !important;
+  --card: #ffffff !important;
+  --card-foreground: #1f2937 !important;
+  --popover: #ffffff !important;
+  --popover-foreground: #1f2937 !important;
+  --muted: #f9fafb !important;
+  --muted-foreground: #6b7280 !important;
+  --border: #e5e7eb !important;
+  --primary: #000000 !important;
+  --primary-foreground: #ffffff !important;
+  --secondary: #f3f4f6 !important;
+  --secondary-foreground: #1f2937 !important;
+  --ring: #000000 !important;
+  background-color: #ffffff !important;
+  color: #1f2937 !important;
+}
+
+/* Crypto Yield Slider Styling - Force visible colors with multiple selectors */
+.crypto-yield-slider [data-radix-slider-track],
+.crypto-yield-slider .relative.h-2 {
+  height: 8px !important;
+  background-color: #e5e7eb !important;
+  border-radius: 9999px !important;
+  position: relative !important;
+}
+
+.crypto-yield-slider [data-radix-slider-range],
+.crypto-yield-slider .absolute.h-full {
+  height: 100% !important;
+  background-color: #3b82f6 !important;
+  border-radius: 9999px !important;
+  position: absolute !important;
+}
+
+.crypto-yield-slider [data-radix-slider-thumb],
+.crypto-yield-slider .block.h-5.w-5 {
+  width: 20px !important;
+  height: 20px !important;
+  background-color: #ffffff !important;
+  border: 2px solid #3b82f6 !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.crypto-yield-slider [data-radix-slider-thumb]:hover,
+.crypto-yield-slider .block.h-5.w-5:hover {
+  background-color: #f8fafc !important;
+  transform: scale(1.1) !important;
+}
+
+.crypto-yield-slider [data-radix-slider-thumb]:focus,
+.crypto-yield-slider .block.h-5.w-5:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3) !important;
+}
+
+.crypto-yield-slider [data-radix-slider-thumb]:focus-visible,
+.crypto-yield-slider .block.h-5.w-5:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Additional fallback selectors for Radix UI Slider */
+.crypto-yield-slider span[role="slider"] {
+  width: 20px !important;
+  height: 20px !important;
+  background-color: #ffffff !important;
+  border: 2px solid #3b82f6 !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.crypto-yield-slider span[data-orientation="horizontal"] {
+  height: 8px !important;
+  background-color: #e5e7eb !important;
+  border-radius: 9999px !important;
+}
+
+.crypto-yield-slider span[data-orientation="horizontal"] > span {
+  height: 100% !important;
+  background-color: #3b82f6 !important;
+  border-radius: 9999px !important;
+}

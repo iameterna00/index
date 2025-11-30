@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '0.0.0.0:5000:5000'
+    environment:
+      - DATABASE_URL=postgresql://postgres:root@postgres:5432/indexmaker?sslmode=disable  # Updated host to 'postgres'
+      - COINGECKO_API_KEY=${COINGECKO_API_KEY}
+      - COINMARKETCAP_API_KEY=${COINMARKETCAP_API_KEY}
+      - BINANCE_API_KEY=${BINANCE_API_KEY}
+      - BINANCE_API_SECRET=${BINANCE_API_SECRET}
+      - ETH_RPC_URL=${ETH_RPC_URL}
+      - POLYGON_RPC_URL=${POLYGON_RPC_URL}
+      - BASE_RPCURL=${BASE_RPCURL}
+      - BASE_SEPOLIA_RPCURL=${BASE_SEPOLIA_RPCURL}
+      - INDEX_REGISTRY_ADDRESS=${INDEX_REGISTRY_ADDRESS}
+      - INDEX_FACTORY_ADDRESS=${INDEX_FACTORY_ADDRESS}
+      - OTC_CUSTODY_ADDRESS=${OTC_CUSTODY_ADDRESS}
+      - PSYMM_ADDRESS=${PSYMM_ADDRESS}
+      - PRIVATE_KEY=${PRIVATE_KEY}
+      - USDC_ADDRESS_IN_BASE=${USDC_ADDRESS_IN_BASE}
+      - REDIS_URL=redis://redis:6379
+      - SCRAPER_API_KEY=${SCRAPER_API_KEY}
+      - HF_API_TOKEN=${HF_API_TOKEN}
+      - Llama3_API_KEY=${Llama3_API_KEY}
+    depends_on:
+      - redis # Only depends on Redis now
+      - postgres
+
+  redis:
+    image: redis:7
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/data
+
+  postgres:  # New PostgreSQL service
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=indexmaker
+    ports:
+      - '5432:5432'  # Exposed for host access (optional)
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      # - ./migrations/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  redis-data:
+  postgres-data:  # New volume for PostgreSQL
